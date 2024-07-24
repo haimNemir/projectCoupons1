@@ -9,9 +9,9 @@ import java.util.List;
 public class ConnectionPool {
 
     private final int MAX_CONNECTIONS = 20;
-    private final String URL = "jdbc:mysql://localhost:3306/couponsDB";
+    private final String URL = "jdbc:mysql://localhost:3306/couponsdb";
     private final String USER = "root";
-    private final String PASSWORD = "1234";
+    private final String PASSWORD = "Qwert1trewq!";
 
     private List<Connection> connections = new ArrayList<>(MAX_CONNECTIONS);
 
@@ -34,7 +34,7 @@ public class ConnectionPool {
             try {
                 wait();
             } catch (InterruptedException e) {
-                System.out.println("The connection upend even without free connection(he was did not - wait()) ");
+                System.out.println(e.getMessage());;
             }
         }
 

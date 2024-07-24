@@ -1,5 +1,5 @@
 package beans;
 
 public enum Category {
-    FOOD, FASHION, CINEMA, SPA, TECH, SPORT;
+    FOOD, ELECTRICITY, RESTAURANT,VACATION, FASHION, CINEMA, SPA, TECH, SPORT;
 }

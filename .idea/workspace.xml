@@ -4,19 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f642b911-4f40-4ea0-b8c2-1ebd1e4cc20b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CouponsProject1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beans/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beans/Company.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beans/Coupon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/CompaniesDBDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/db/ConnectionPool.java" afterDir="false" />
+    <list default="true" id="f642b911-4f40-4ea0-b8c2-1ebd1e4cc20b" name="Changes" comment="20/07/2024">
+      <change afterPath="$PROJECT_DIR$/src/DAL/CompaniesDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAL/test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beans/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beans/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/beans/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beans/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/beans/Company.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beans/Coupon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/beans/Coupon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/CompaniesDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/CompaniesDBDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/ConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/ConnectionPool.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +26,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -45,17 +44,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/חיים/Desktop/java לא למחוק/קישור SQL to JAVA/mysql-connector-j-8.4.0.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/חיים/Desktop/java לא למחוק/קישור SQL to JAVA/mysql-connector-j-8.4.0.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="beans" />
@@ -73,6 +73,23 @@
       <option name="presentableId" value="Default" />
       <updated>1721215161388</updated>
     </task>
+    <task id="LOCAL‎-00001" summary="20/07/2024">
+      <option name="closed" value="true" />
+      <created>1721739006372</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL‎-00001" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1721739006373</updated>
+    </task>
+    <task id="LOCAL‎-00002" summary="20/07/2024">
+      <option name="closed" value="true" />
+      <created>1721739021968</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1721739021968</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -85,5 +102,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="20/07/2024" />
+    <option name="LAST_COMMIT_MESSAGE" value="20/07/2024" />
   </component>
 </project>

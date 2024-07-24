@@ -25,7 +25,7 @@ public class Coupon {
         this.price = price;
         this.image = image;
     }
-    // used for select
+    // used for create Coupon without id(DB generate id alone).
     public Coupon(int companyID, Category category, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
         this.companyID = companyID;
         this.category = category;
