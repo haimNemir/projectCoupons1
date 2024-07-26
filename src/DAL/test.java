@@ -1,30 +1,21 @@
 package DAL;
 
-import beans.Company;
+import DAL.Customer.CustomerDBDAO;
+import Utils.RandomFirstName;
+import Utils.RandomLastName;
+import Utils.RandomPassword;
+import beans.Customer;
 
 import java.sql.SQLException;
 
 public class test {
     public static void main(String[] args) {
         try {
-            Company company = new Company(6,"Google", "google@gmail.com", "14327842", null);
-            CompaniesDBDAO companiesDBDAO = new CompaniesDBDAO();
-            companiesDBDAO.deleteCompany(6);
+            CustomerDBDAO customer1 = new CustomerDBDAO();
+            String firstName = RandomFirstName.getRandomName();
+            String lastName = RandomLastName.getRandomName();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            customer1.addCustomer(new Customer(firstName, RandomLastName.getRandomName(), firstName + "@gmail.com", RandomPassword.getRandomPassword(), null));
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

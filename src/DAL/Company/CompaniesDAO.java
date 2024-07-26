@@ -1,4 +1,4 @@
-package DAL;
+package DAL.Company;
 
 import beans.Company;
 
