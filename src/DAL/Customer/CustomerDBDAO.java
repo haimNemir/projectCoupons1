@@ -76,7 +76,7 @@ public class CustomerDBDAO implements CustomerDAO{
     }
 
     @Override
-    public ArrayList<Customer> getAllCustomers() throws SQLException {//!!!!!!!!!!!!!!!!!!!!!!!!!! check if this method working
+    public ArrayList<Customer> getAllCustomers() throws SQLException {
         ArrayList<Customer> customers = new ArrayList<>();
         Connection con = pool.getConnection();
         try {
@@ -84,10 +84,11 @@ public class CustomerDBDAO implements CustomerDAO{
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 customers.add(new Customer(
-                        rs.getString(1),
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
+                        rs.getString(5),
                         null));
             }
         } finally {
@@ -98,6 +99,24 @@ public class CustomerDBDAO implements CustomerDAO{
 
     @Override
     public Customer getOneCustomer(int customerID) throws SQLException {
-        return null;
+        Customer customer = null;
+        Connection con = pool.getConnection();
+        try {
+            PreparedStatement statement = con.prepareStatement("select * from couponsdb.customers where id = (?)");
+            statement.setInt(1, customerID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                customer = new Customer (
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        null);
+            }
+        } finally {
+            pool.restoreConnection(con);
+        }
+        return customer;
     }
 }
