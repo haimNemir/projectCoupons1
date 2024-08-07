@@ -1,8 +1,7 @@
 package DAL.Customer;
 
-import beans.Company;
-import beans.Customer;
-import db.ConnectionPool;
+import Beans.Customer;
+import DB.ConnectionPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,10 +33,10 @@ public class CustomerDBDAO implements CustomerDAO{
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("insert into couponsdb.customers(first_name, last_name, email, password) values(?, ?, ?, ?);");
-            statement.setString(2, customer.getFirstName());
-            statement.setString(3, customer.getLastName());
-            statement.setString(4, customer.getEmail());
-            statement.setString(5, customer.getPassword());
+            statement.setString(1, customer.getFirstName());
+            statement.setString(2, customer.getLastName());
+            statement.setString(3, customer.getEmail());
+            statement.setString(4, customer.getPassword());
             statement.execute();
         } finally {
             pool.restoreConnection(con);

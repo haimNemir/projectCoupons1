@@ -1,6 +1,6 @@
 package DAL.Customer;
 
-import beans.Customer;
+import Beans.Customer;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

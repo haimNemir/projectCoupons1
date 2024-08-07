@@ -1,7 +1,8 @@
-package beans;
+package Beans;
 
 
-import java.sql.Date;
+
+import java.util.Date;
 
 public class Coupon {
     private int id;
@@ -25,7 +26,10 @@ public class Coupon {
         this.price = price;
         this.image = image;
     }
+
     // used for create Coupon without id(DB generate id alone).
+
+
     public Coupon(int companyID, Category category, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
         this.companyID = companyID;
         this.category = category;
@@ -113,7 +117,6 @@ public class Coupon {
     public void setImage(String image) {
         this.image = image;
     }
-
 
     @Override
     public String toString() {

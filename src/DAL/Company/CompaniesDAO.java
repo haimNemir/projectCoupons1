@@ -1,6 +1,6 @@
 package DAL.Company;
 
-import beans.Company;
+import Beans.Company;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

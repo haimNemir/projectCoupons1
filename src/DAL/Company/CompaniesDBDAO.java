@@ -1,7 +1,7 @@
 package DAL.Company;
 
-import beans.Company;
-import db.ConnectionPool;
+import Beans.Company;
+import DB.ConnectionPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,11 +47,10 @@ public class CompaniesDBDAO implements CompaniesDAO {
     public void updateCompany(Company company) throws SQLException {
         Connection con = pool.getConnection();
         try {
-            PreparedStatement statement = con.prepareStatement("update couponsdb.companies set name = (?), email = (?), password = (?) where id = (?);");
-            statement.setString(1, company.getName());
-            statement.setString(2, company.getEmail());
-            statement.setString(3, company.getPassword());
-            statement.setInt(4, company.getId());
+            PreparedStatement statement = con.prepareStatement("update couponsdb.companies set email = (?), password = (?) where id = (?);");
+            statement.setString(1, company.getEmail());
+            statement.setString(2, company.getPassword());
+            statement.setInt(3, company.getId());
             statement.execute();
         } finally {
             pool.restoreConnection(con);

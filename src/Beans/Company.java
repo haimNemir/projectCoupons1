@@ -1,32 +1,27 @@
-package beans;
+package Beans;
 
 import java.util.ArrayList;
 
-public class Customer {
+public class Company {
     private int id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
+    private String name, email, password;
     private ArrayList<Coupon> coupons;
 
-    public Customer(int id, String firstName, String lastName, String email, String password, ArrayList<Coupon> coupons) {
+    public Company(int id, String name, String email, String password, ArrayList<Coupon> coupons) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.coupons = coupons;
-    }
-    // used for create menially new Customer from java(AI - auto increment might interfere without the constructor)
-    public Customer(String firstName, String lastName, String email, String password, ArrayList<Coupon> coupons) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.email = email;
         this.password = password;
         this.coupons = coupons;
     }
 
+    // used for create menially new Company from java(AI - auto increment might interfere without the constructor)
+    public Company(String name, String email, String password, ArrayList<Coupon> coupons) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.coupons = coupons;
+    }
 
     public int getId() {
         return id;
@@ -36,20 +31,12 @@ public class Customer {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -78,10 +65,9 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "Company{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", coupons=" + coupons +
