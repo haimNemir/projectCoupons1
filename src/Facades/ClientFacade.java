@@ -11,7 +11,7 @@ import DAL.Customer.CustomerDBDAO;
 import java.sql.SQLException;
 
 public abstract class ClientFacade {
-    public abstract boolean login(String email, String password);
+    public abstract boolean login(String email, String password) throws SQLException;
 
     protected abstract CompaniesDBDAO companiesDBDAO() throws SQLException;
 

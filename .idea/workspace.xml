@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f642b911-4f40-4ea0-b8c2-1ebd1e4cc20b" name="Changes" comment="Adding CompaniesDBDAO&#10;Adding beans">
-      <change afterPath="$PROJECT_DIR$/src/DAL/Coupons/CouponDBDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAL/Coupons/CouponsDAO.java" afterDir="false" />
+    <list default="true" id="f642b911-4f40-4ea0-b8c2-1ebd1e4cc20b" name="Changes" comment="finish Admin Facade">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Customer/CustomerDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Customer/CustomerDBDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beans/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/beans/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beans/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/beans/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CouponsProject1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CouponsProject1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAL/Coupons/CouponDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Coupons/CouponDBDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Facades/AdminFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/AdminFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Facades/ClientFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/ClientFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Facades/CompanyFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/CompanyFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Facades/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,18 +44,20 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.test.executor": "Run",
+    "Application.test.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/חיים/Desktop/java לא למחוק/קישור SQL to JAVA/mysql-connector-j-8.4.0.jar",
+    "last_opened_file_path": "C:/Users/Haim/IdeaProjects/IdeaProjects/Hotels-JPA",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="Exceptions" />
       <recent name="beans" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -103,7 +105,23 @@
       <option name="project" value="LOCAL‎" />
       <updated>1722028698904</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL‎-00005" summary="Adding CompaniesDBDAO&#10;Adding beans">
+      <option name="closed" value="true" />
+      <created>1722118153845</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL‎-00005" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1722118153845</updated>
+    </task>
+    <task id="LOCAL-00006" summary="finish Admin Facade">
+      <option name="closed" value="true" />
+      <created>1723029968347</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1723029968347</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -120,6 +138,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="20/07/2024" />
     <MESSAGE value="Adding CompaniesDBDAO&#10;Adding beans" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding CompaniesDBDAO&#10;Adding beans" />
+    <MESSAGE value="finish Admin Facade" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish Admin Facade" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Facades/test.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -17,6 +17,8 @@ import java.util.Objects;
  * Give access for the Administrator to the DataBase .
  */
 public class AdminFacade extends ClientFacade {
+    public AdminFacade() {
+    }
 
     @Override
     public boolean login(String email, String password) {

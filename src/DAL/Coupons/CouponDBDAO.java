@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class CouponDBDAO implements CouponsDAO {
@@ -60,11 +61,7 @@ public class CouponDBDAO implements CouponsDAO {
             statement.setDouble(8, coupon.getPrice());
             statement.setString(9, coupon.getImage());
             statement.setInt(10, coupon.getId());
-            if(statement.execute()){
-                System.out.println();
-            }else {
-                throw new NotExistException();
-            }
+            statement.execute();
         } finally {
             pool.restoreConnection(con);
         }
