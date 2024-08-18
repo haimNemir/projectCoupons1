@@ -1,8 +1,8 @@
-package Beans;
+package Utils;
 
 import java.util.HashMap;
 import java.util.Random;
-
+// you need entered manually Enum variables to the DB from this Enum!!
 public enum Category {
     FOOD, ELECTRICITY, RESTAURANT, VACATION, FASHION, CINEMA, SPA, TECH, SPORT;
 

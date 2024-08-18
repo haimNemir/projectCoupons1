@@ -2,7 +2,7 @@ package DAL.Coupons;
 
 import Exceptions.NotExistException;
 import Utils.CreateDate;
-import Beans.Category;
+import Utils.Category;
 import Beans.Coupon;
 import DB.ConnectionPool;
 
@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class CouponDBDAO implements CouponsDAO {
@@ -199,6 +198,30 @@ public class CouponDBDAO implements CouponsDAO {
             pool.restoreConnection(con);
         }
     }
+
+    /**
+     *
+     * @param customerId
+     * @return the coupons the customer purchase
+     * @throws SQLException
+     */
+    public ArrayList<Integer> getAllPurchase(int customerId) throws SQLException {
+        ArrayList<Integer> purchasedCoupons = new ArrayList<>();
+        Connection con = pool.getConnection();
+        try {
+            PreparedStatement statement = con.prepareStatement("select coupons_id from couponsdb.customer_vs_coupons where customer_id = ?;");
+            statement.setInt(1, customerId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                purchasedCoupons.add(rs.getInt(1));
+            }
+        } finally {
+            pool.restoreConnection(con);
+        }
+        return purchasedCoupons;
+    }
+
+
 
 
 }

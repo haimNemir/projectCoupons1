@@ -2,6 +2,8 @@ package Beans;
 
 
 
+import Utils.Category;
+
 import java.util.Date;
 
 public class Coupon {

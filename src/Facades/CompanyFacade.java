@@ -1,13 +1,10 @@
 package Facades;
 
-import Beans.Category;
+import Utils.Category;
 import Beans.Company;
 import Beans.Coupon;
-import DAL.Company.CompaniesDAO;
 import DAL.Company.CompaniesDBDAO;
 import DAL.Coupons.CouponDBDAO;
-import DAL.Coupons.CouponsDAO;
-import DAL.Customer.CustomerDAO;
 import DAL.Customer.CustomerDBDAO;
 import Exceptions.AlreadyExistException;
 import Exceptions.NotExistException;
@@ -19,15 +16,11 @@ import java.util.Objects;
 public class CompanyFacade extends ClientFacade {
     private int companyId;
 
-    public CompanyFacade(int companyId) {
-        this.companyId = companyId;
-    }
-
     public CompanyFacade() {
     }
 
     @Override
-    public boolean login(String email, String password) throws SQLException {
+    public boolean login(String email, String password) throws SQLException, NotExistException {
         ArrayList<Company> companies = companiesDBDAO().getAllCompanies();
         for (Company ref : companies) {
             if (Objects.equals(ref.getEmail(), email) && Objects.equals(ref.getPassword(), password)) {
@@ -35,6 +28,7 @@ public class CompanyFacade extends ClientFacade {
                 return true;
             }
         }
+        System.out.println("The email or the password are incorrect");
         return false;
     }
 
@@ -77,6 +71,11 @@ public class CompanyFacade extends ClientFacade {
         couponDBDAO().deleteCoupon(couponID);
     }
 
+    /**
+     *
+     * @return all the coupons of this company
+     * @throws SQLException
+     */
     public ArrayList<Coupon> getCompanyCoupons() throws SQLException {
         ArrayList<Coupon> allCoupons = couponDBDAO().getAllCoupons();
         ArrayList<Coupon> companyCoupons = new ArrayList<>();
@@ -88,19 +87,44 @@ public class CompanyFacade extends ClientFacade {
         return companyCoupons;
     }
 
+    /**
+     *
+     * @param category
+     * @return coupons from the type of category you will set.
+     * @throws SQLException
+     */
     public ArrayList<Coupon> getCompanyCoupons(Category category) throws SQLException {
         ArrayList<Coupon> allCoupons = couponDBDAO().getAllCoupons();
         ArrayList<Coupon> companyCoupons = new ArrayList<>();
         for (Coupon ref : allCoupons) {
-            System.out.println("the coupon " + ref + "have the category:  " +ref.getCategory());
             if (ref.getCompanyID() == companyId && ref.getCategory() == category) {
                 companyCoupons.add(ref);
-                System.out.println(companyCoupons);
             }
         }
         return companyCoupons;
     }
 
+    /**
+     *
+     * @param maxPrice
+     * @return the company coupons that cost not more than maxPrice
+     * @throws SQLException
+     */
+    public ArrayList<Coupon> getCompanyCoupons(double maxPrice) throws SQLException {
+        ArrayList<Coupon> allCoupons = couponDBDAO().getAllCoupons();
+        ArrayList<Coupon> selectedCoupons = new ArrayList<>();
+        for (Coupon ref : allCoupons) {
+            if (ref.getPrice() <= maxPrice) {
+                selectedCoupons.add(ref);
+            }
+        }
+        return selectedCoupons;
+
+    }
+
+    public Company getCompanyDetails() throws SQLException {
+        return companiesDBDAO().getOneCompany(companyId);
+    }
 
     @Override
     protected CompaniesDBDAO companiesDBDAO() throws SQLException {

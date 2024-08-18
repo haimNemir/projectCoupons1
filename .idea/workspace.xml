@@ -4,14 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f642b911-4f40-4ea0-b8c2-1ebd1e4cc20b" name="Changes" comment="finish Admin Facade">
+    <list default="true" id="f642b911-4f40-4ea0-b8c2-1ebd1e4cc20b" name="Changes" comment="middle CompanyFacade">
+      <change afterPath="$PROJECT_DIR$/src/Exceptions/CouponException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Facades/ClientType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Facades/LoginManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Utils/CouponExpirationDailyJob.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Utils/RandomCompanyName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CouponsProject1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CouponsProject1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Beans/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Beans/Coupon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Beans/Coupon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAL/Coupons/CouponDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Coupons/CouponDBDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Facades/AdminFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/AdminFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Facades/ClientFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/ClientFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Facades/CompanyFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/CompanyFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Facades/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Facades/CustomerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/CustomerFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Facades/test.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +29,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -44,7 +51,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.test.executor": "Debug",
+    "Application.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
@@ -121,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723029968347</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="middle CompanyFacade">
+      <option name="closed" value="true" />
+      <created>1723727819677</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1723727819677</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,17 +154,7 @@
     <MESSAGE value="20/07/2024" />
     <MESSAGE value="Adding CompaniesDBDAO&#10;Adding beans" />
     <MESSAGE value="finish Admin Facade" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish Admin Facade" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Facades/test.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="middle CompanyFacade" />
+    <option name="LAST_COMMIT_MESSAGE" value="middle CompanyFacade" />
   </component>
 </project>

@@ -1,35 +1,134 @@
-//package Facades;
-//
-//import DAL.Company.CompaniesDAO;
-//import DAL.Coupons.CouponsDAO;
-//import DAL.Customer.CustomerDAO;
-//
-//public class CustomerFacade extends ClientFacade {
-//    @Override
-//    public boolean login(String email, String password) {
-//        return false;
-//    }
-//
-//    @Override
-//    protected CompaniesDAO companiesDAO() {
-//        return null;
-//    }
-//
-//
-//    @Override
-//    protected CustomerDAO customerDAO() {
-//        return null;
-//    }
-//
-//    @Override
-//    protected CouponsDAO couponsDAO() {
-//        return null;
-//    }
+package Facades;
 
-//// public..addCoupons using DAO
-//    א. לוודא שהלקוח לא רכש כבר בעבר קופון כזה.
-//    ב. לוודא שהקופון הדרוש עדיין קיים במלאי )הכמות שלו גדולה מ0-(.
-//    ג. לוודא שתאריך התפוגה של הקופון עדיין לא הגיע.
-//    ד. לבצע את רכישת הקופון ע"י הלקוח.
-//    ה. להוריד את הכמות במלאי של הקופון ב.
-//}
+import Utils.Category;
+import Beans.Coupon;
+import Beans.Customer;
+import DAL.Company.CompaniesDBDAO;
+import DAL.Coupons.CouponDBDAO;
+import DAL.Customer.CustomerDBDAO;
+import Exceptions.CouponException;
+import Exceptions.NotExistException;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
+
+public class CustomerFacade extends ClientFacade {
+    private int customerId;
+
+    public CustomerFacade() {
+    }
+
+    @Override
+    public boolean login(String email, String password) throws SQLException, NotExistException {
+        ArrayList<Customer> customers = customerDBDAO().getAllCustomers();
+        for (Customer ref : customers) {
+            if (Objects.equals(ref.getEmail(), email) && Objects.equals(ref.getPassword(), password)) {
+                this.customerId = ref.getId();
+                return true;
+            }
+        }
+        System.out.println("The email or the password are incorrect");
+        return false;
+    }
+
+    public void purchaseCoupon(Coupon coupon) throws SQLException, CouponException, NotExistException {
+        boolean isExist = false;
+        boolean isNotExpired = false;
+        boolean isNotSellOut = false;
+        boolean isNotDuplicated  = false;
+        Coupon couponFromDB = couponDBDAO().getOneCoupon(coupon.getId());
+        if (couponFromDB != null ) { // check if this coupon exist in the DB
+            isExist = true;
+        }
+        Date currentDate = new Date();
+        if (currentDate.before(coupon.getEndDate())) {//check if the expiration date if left
+            isNotExpired = true;
+        }else {
+            System.out.println("The expiration date is left!");
+            return;
+        }
+        if (couponFromDB.getAmount() > 0 ) {// check if left from this coupon for selling
+            isNotSellOut = true;
+        } else {
+            System.out.println("There are no coupons left to sell");
+            return;
+        }
+        ArrayList<Integer> allPurchaseOfTheCustomer = couponDBDAO().getAllPurchase(customerId);
+        for (Integer ref: allPurchaseOfTheCustomer) {
+            if (coupon.getId() == ref) {
+                System.out.println("This coupon has already been purchased!");
+                return;
+            }
+        }
+        isNotDuplicated = true;
+        if (isExist && isNotExpired && isNotSellOut) {
+            couponDBDAO().addCouponPurchase(customerId, coupon.getId());
+        }
+        int amount = coupon.getAmount();
+        coupon.setAmount(amount-1);
+        couponDBDAO().updateCoupon(coupon);
+    }
+
+    public ArrayList<Coupon> getCustomerCoupons() throws SQLException, NotExistException {
+        ArrayList<Coupon> coupons = new ArrayList<>();
+        ArrayList<Integer> allCouponsPurchasedByCustomer = couponDBDAO().getAllPurchase(customerId);
+        for (Integer ref: allCouponsPurchasedByCustomer){
+            coupons.add(couponDBDAO().getOneCoupon(ref));
+        }
+        return coupons;
+    }
+
+    public ArrayList<Coupon> getCustomerCoupons(Category category) throws SQLException, NotExistException {
+        ArrayList<Integer> allCouponsPurchasedByCustomer = couponDBDAO().getAllPurchase(customerId);
+        ArrayList<Coupon> couponsByCategory = new ArrayList<>();
+        for (Integer ref: allCouponsPurchasedByCustomer){
+            if (couponDBDAO().getOneCoupon(ref).getCategory() == category) // check if the category of the coupon is similar to the category we have got
+                couponsByCategory.add(couponDBDAO().getOneCoupon(ref));
+        }
+        if (couponsByCategory.isEmpty()){
+            throw new NotExistException("There are no such coupons for this customer");
+        }
+        return couponsByCategory;
+    }
+
+    /**
+     *
+     * @param "double max price the customer spend on the most expensive coupon
+     * @return all coupons that cheap from the most expensive coupon
+     * @throws SQLException
+     * @throws NotExistException
+     */
+    public ArrayList<Coupon> getCustomerCoupons(double maxPrice) throws SQLException, NotExistException {
+        ArrayList<Integer> allCouponsPurchasedByCustomer = couponDBDAO().getAllPurchase(customerId);
+        ArrayList<Coupon> couponsCheapestFromMaxPrice = new ArrayList<>();
+        for (Integer ref: allCouponsPurchasedByCustomer){
+            if (couponDBDAO().getOneCoupon(ref).getPrice() < maxPrice)
+                couponsCheapestFromMaxPrice.add(couponDBDAO().getOneCoupon(ref));
+        }
+        if (couponsCheapestFromMaxPrice.isEmpty()){
+            throw new NotExistException("There are no such coupons for this customer");
+        }
+        return couponsCheapestFromMaxPrice;
+    }
+
+    public Customer getCustomerDetails() throws SQLException {
+        return customerDBDAO().getOneCustomer(customerId);
+    }
+
+    @Override
+    protected CompaniesDBDAO companiesDBDAO() throws SQLException {
+        return new CompaniesDBDAO();
+    }
+
+    @Override
+    protected CustomerDBDAO customerDBDAO() throws SQLException {
+        return new CustomerDBDAO();
+    }
+
+    @Override
+    protected CouponDBDAO couponDBDAO() throws SQLException {
+        return new CouponDBDAO();
+    }
+}
