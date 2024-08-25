@@ -2,6 +2,7 @@ package Utils;
 
 import Beans.Coupon;
 import DAL.Coupons.CouponDBDAO;
+import Exceptions.CouponException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class CouponExpirationDailyJob implements Runnable {
                     }
                 }
                 sleep(3_600_000 * 24); // 24 hours
-            } catch (SQLException e) {
+            } catch (SQLException | CouponException e) {
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
                 System.out.println("Thread interrupted!!");

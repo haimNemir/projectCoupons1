@@ -2,6 +2,8 @@ package DAL.Customer;
 
 import Beans.Customer;
 import DB.ConnectionPool;
+import Exceptions.CouponException;
+import Exceptions.CustomerException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +31,7 @@ public class CustomerDBDAO implements CustomerDAO{
     }
 
     @Override
-    public void addCustomer(Customer customer) throws SQLException {
+    public void addCustomer(Customer customer) throws SQLException, CustomerException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("insert into couponsdb.customers(first_name, last_name, email, password) values(?, ?, ?, ?);");
@@ -37,7 +39,10 @@ public class CustomerDBDAO implements CustomerDAO{
             statement.setString(2, customer.getLastName());
             statement.setString(3, customer.getEmail());
             statement.setString(4, customer.getPassword());
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CustomerException("Not found any customer to add");
+            }
         } finally {
             pool.restoreConnection(con);
         }
@@ -47,7 +52,7 @@ public class CustomerDBDAO implements CustomerDAO{
      *  but the ID is not updated.
      */
     @Override
-    public void updateCustomer(Customer customer) throws SQLException {
+    public void updateCustomer(Customer customer) throws SQLException, CustomerException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("update couponsdb.customers set first_name = (?), last_name = (?), email = (?), password = (?) where id = (?);");
@@ -56,19 +61,25 @@ public class CustomerDBDAO implements CustomerDAO{
             statement.setString(3, customer.getEmail());
             statement.setString(4, customer.getPassword());
             statement.setInt(5, customer.getId());
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CustomerException("Not found any customer to update");
+            }
         } finally {
             pool.restoreConnection(con);
         }
     }
 
     @Override
-    public void deleteCustomer(int customerID) throws SQLException {
+    public void deleteCustomer(int customerID) throws SQLException, CustomerException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("delete from couponsdb.customers where id = (?);");
             statement.setInt(1, customerID);
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CustomerException("Not found any customer to delete");
+            }
         } finally {
             pool.restoreConnection(con);
         }

@@ -1,5 +1,7 @@
 package DAL.Coupons;
 
+import Exceptions.CompanyException;
+import Exceptions.CouponException;
 import Exceptions.NotExistException;
 import Utils.CreateDate;
 import Utils.Category;
@@ -20,7 +22,7 @@ public class CouponDBDAO implements CouponsDAO {
     }
 
     @Override
-    public void addCoupon(Coupon coupon) throws SQLException {
+    public void addCoupon(Coupon coupon) throws SQLException, CouponException {
         Connection con = pool.getConnection();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//change the Date to the format pattern
         String formattedDate1 = sdf.format(coupon.getStartDate());
@@ -36,14 +38,17 @@ public class CouponDBDAO implements CouponsDAO {
             statement.setInt(7, coupon.getAmount());
             statement.setDouble(8, coupon.getPrice());
             statement.setString(9, coupon.getImage());
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CouponException("Not found any coupon to add");
+            }
         } finally {
             pool.restoreConnection(con);
         }
     }
 
     @Override
-    public void updateCoupon(Coupon coupon) throws SQLException, NotExistException {
+    public void updateCoupon(Coupon coupon) throws SQLException, CouponException {
         Connection con = pool.getConnection();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//change the Date to the format pattern
         String formattedDate1 = sdf.format(coupon.getStartDate());
@@ -60,7 +65,10 @@ public class CouponDBDAO implements CouponsDAO {
             statement.setDouble(8, coupon.getPrice());
             statement.setString(9, coupon.getImage());
             statement.setInt(10, coupon.getId());
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CouponException("Not found any coupon to update");
+            }
         } finally {
             pool.restoreConnection(con);
         }
@@ -72,12 +80,15 @@ public class CouponDBDAO implements CouponsDAO {
      * @throws SQLException
      */
     @Override
-    public void deleteCoupon(int couponID) throws SQLException {
+    public void deleteCoupon(int couponID) throws SQLException, CouponException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("delete from couponsdb.coupons where id = (?);");
             statement.setInt(1, couponID);
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CouponException("Not found any coupon to delete");
+            }
         } finally {
             pool.restoreConnection(con);
         }
@@ -141,13 +152,16 @@ public class CouponDBDAO implements CouponsDAO {
     }
 
     @Override
-    public void addCouponPurchase(int customerID, int couponID) throws SQLException {
+    public void addCouponPurchase(int customerID, int couponID) throws SQLException, CouponException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("insert into couponsdb.customer_vs_coupons(customer_id, coupons_id) values(?, ?);");
             statement.setInt(1, customerID);
             statement.setInt(2, couponID);
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CouponException("Could not complete the purchase!");
+            }
         } finally {
             pool.restoreConnection(con);
         }
@@ -160,40 +174,44 @@ public class CouponDBDAO implements CouponsDAO {
      * @throws SQLException
      */
     @Override
-    public void deleteCouponPurchase(int customerID, int couponID) throws SQLException {
+    public void deleteCouponPurchase(int customerID, int couponID) throws SQLException, CouponException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("delete from couponsdb.customer_vs_coupons where customer_id = (?) and coupons_id = (?);");
             statement.setInt(1, customerID);
             statement.setInt(2, couponID);
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CouponException("Not found any coupon to delete");
+            };
         } finally {
             pool.restoreConnection(con);
         }
     }
 
-    /**
-     * Delete Coupon purchase by Coupon ID.
-     * @param couponID
-     * @throws SQLException
-     */
-    public void deleteCouponPurchaseByCouponID(int couponID) throws SQLException {
+    public void deleteCouponPurchaseByCouponID(int couponID) throws SQLException, CouponException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("delete from couponsdb.customer_vs_coupons where coupons_id = (?);");
             statement.setInt(1, couponID);
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CouponException("Not found any purchased coupon to delete");
+            }
         } finally {
             pool.restoreConnection(con);
         }
     }
 
-    public void deleteCouponPurchaseByCustomerID(int customerID) throws SQLException {
+    public void deleteCouponPurchaseByCustomerID(int customerID) throws SQLException, CouponException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("delete from couponsdb.customer_vs_coupons where customer_id = (?);");
             statement.setInt(1, customerID);
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CouponException("Not found any purchased coupon to delete");
+            }
         } finally {
             pool.restoreConnection(con);
         }

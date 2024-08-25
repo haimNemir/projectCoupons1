@@ -15,7 +15,7 @@ public class Company {
         this.coupons = coupons;
     }
 
-    // used for create menially new Company from java(AI - auto increment might interfere without the constructor)
+    // used for create menially new Company from java(AI - auto increment of the database might interfere without this constructor)
     public Company(String name, String email, String password, ArrayList<Coupon> coupons) {
         this.name = name;
         this.email = email;

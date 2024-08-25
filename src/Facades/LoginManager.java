@@ -25,7 +25,6 @@ public class LoginManager {
                     adminFacade.login(email,password);
                     return adminFacade;
                 } else return null;
-
             case Company:
                 if (new CompanyFacade().login(email,password)) {
                     CompanyFacade companyFacade = new CompanyFacade();

@@ -33,25 +33,30 @@ public class CustomerFacade extends ClientFacade {
         return false;
     }
 
+    /**
+     *
+     * @param coupon adding purchased coupon to the table customers_vs_coupons.
+     *               if this coupon already purchased to this customer,
+     *               or if the coupon expiration date left,
+     *               or if the coupon already sold out,
+     *               or if this coupon does not exist = it will not purchase the coupon.
+     *
+     * @throws SQLException
+     * @throws CouponException
+     * @throws NotExistException
+     */
     public void purchaseCoupon(Coupon coupon) throws SQLException, CouponException, NotExistException {
-        boolean isExist = false;
-        boolean isNotExpired = false;
-        boolean isNotSellOut = false;
-        boolean isNotDuplicated  = false;
         Coupon couponFromDB = couponDBDAO().getOneCoupon(coupon.getId());
-        if (couponFromDB != null ) { // check if this coupon exist in the DB
-            isExist = true;
+        if (couponFromDB == null ) { // check if this coupon exist in the DB
+            System.out.println("this coupon does not exist!");
+            return;
         }
         Date currentDate = new Date();
-        if (currentDate.before(coupon.getEndDate())) {//check if the expiration date if left
-            isNotExpired = true;
-        }else {
+        if (currentDate.after(coupon.getEndDate())) {//check if the expiration date if left
             System.out.println("The expiration date is left!");
             return;
         }
-        if (couponFromDB.getAmount() > 0 ) {// check if left from this coupon for selling
-            isNotSellOut = true;
-        } else {
+        if (couponFromDB.getAmount() <= 0 ) {// check if left from this coupon for selling
             System.out.println("There are no coupons left to sell");
             return;
         }
@@ -62,10 +67,7 @@ public class CustomerFacade extends ClientFacade {
                 return;
             }
         }
-        isNotDuplicated = true;
-        if (isExist && isNotExpired && isNotSellOut) {
-            couponDBDAO().addCouponPurchase(customerId, coupon.getId());
-        }
+        couponDBDAO().addCouponPurchase(customerId, coupon.getId());
         int amount = coupon.getAmount();
         coupon.setAmount(amount-1);
         couponDBDAO().updateCoupon(coupon);

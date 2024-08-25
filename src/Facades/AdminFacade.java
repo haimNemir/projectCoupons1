@@ -6,8 +6,7 @@ import Beans.Customer;
 import DAL.Company.CompaniesDBDAO;
 import DAL.Coupons.CouponDBDAO;
 import DAL.Customer.CustomerDBDAO;
-import Exceptions.AlreadyExistException;
-import Exceptions.NotExistException;
+import Exceptions.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,56 +25,41 @@ public class AdminFacade extends ClientFacade {
     }
 
     /**
-     * Add Company to the DB if there is no such Company in there.
-     *
-     * @param company
-     * @throws SQLException
-     * @throws AlreadyExistException
+     * Add Company to the DB if there is no such Company with this name or email.
      */
-    public void addCompany(Company company) throws SQLException, AlreadyExistException {
+    public void addCompany(Company company) throws SQLException, AlreadyExistException, CompanyException {
         ArrayList<Company> companies = companiesDBDAO().getAllCompanies();
-        boolean isNotExist = true;
-        for (int i = 0; i < companies.size(); i++) { // valid if the company is already exist
-            if (Objects.equals(company.getName(), companies.get(i).getName()) || Objects.equals(company.getEmail(), companies.get(i).getEmail())) {
-                isNotExist = false;
+        for (Company value : companies) { // valid if the company is already exist
+            if (Objects.equals(company.getName(), value.getName()) || Objects.equals(company.getEmail(), value.getEmail())) {
                 throw new AlreadyExistException("The company is already exist by name or email!!!");
             }
         }
-        if (isNotExist) {// valid if is a new company
-            companiesDBDAO().addCompany(company);
-        }
+        companiesDBDAO().addCompany(company);
     }
 
     /**
      * @param company get Company with ID, and update the same Company in the DB by the values in the Company.
      *                This method will not update the ID and the name of the Company.
-     *                if there is no Company with this ID its throw Exception.
-     * @throws NotExistException
+     * @throws NotExistException if there is no Company with this ID it will throw Exception.
      * @throws SQLException
      */
-    public void updateCompany(Company company) throws NotExistException, SQLException {
-        ArrayList<Company> companies = companiesDBDAO().getAllCompanies();
-        boolean isExist = false;
-        for (int i = 0; i < companies.size(); i++) { // valid if the company is already exist
-            if (company.getId() == companies.get(i).getId()) {
-                companiesDBDAO().updateCompany(company);
-                isExist = true;
-                break;
-            }
-        }
-        if (!isExist) {
+    public void updateCompany(Company company) throws NotExistException, SQLException, CompanyException {
+        if (companiesDBDAO().getOneCompany(company.getId()) != null) {
+            companiesDBDAO().updateCompany(company);
+        } else {
             throw new NotExistException("There is no Company with this ID");
         }
     }
 
     /**
      * delete Company by ID.
-     * For delete the Company it will delete also the Coupons of the company(from DB table coupons) and also the purchased coupons of the customers
+     * For delete the Company it will delete also the Coupons of
+     * the company(from DB table coupons) and also the purchased coupons of the customers
      *
      * @param companyID
      * @throws SQLException
      */
-    public void deleteCompany(int companyID) throws SQLException {
+    public void deleteCompany(int companyID) throws SQLException, CompanyException, CouponException {
         ArrayList<Coupon> allCouponsOfThisCompany = couponDBDAO().getAllCoupons();
         ArrayList<Integer> couponsOfThisCompany = new ArrayList<>();
         for (int i = 0; i < allCouponsOfThisCompany.size(); i++) { // get the Coupons(!) ID of the company.
@@ -86,7 +70,6 @@ public class AdminFacade extends ClientFacade {
         for (int i = 0; i < couponsOfThisCompany.size(); i++) {
             couponDBDAO().deleteCouponPurchaseByCouponID(couponsOfThisCompany.get(i)); // Delete the right Coupons of the Company from DB Table - customers_vs_coupons.
         }
-        ArrayList<Coupon> allCoupons = couponDBDAO().getAllCoupons();
         for (int i = 0; i < couponsOfThisCompany.size(); i++) {
             couponDBDAO().deleteCoupon(couponsOfThisCompany.get(i));//Delete the right Coupon from DB table - coupons.
         }
@@ -104,30 +87,25 @@ public class AdminFacade extends ClientFacade {
 
     /**
      * add new customer to the DB if there is no such customer with this email there
+     *
      * @param customer
      * @throws SQLException
      */
-    public void addCustomer(Customer customer) throws SQLException, AlreadyExistException {
+    public void addCustomer(Customer customer) throws SQLException, AlreadyExistException, CustomerException {//!!!!!!!!!!!!!!check this method
         ArrayList<Customer> allCustomers = customerDBDAO().getAllCustomers();
-        boolean thisCustomerExist = false;
         for (Customer ref : allCustomers) {
             if (Objects.equals(ref.getEmail(), customer.getEmail())) {
-                thisCustomerExist = true;
-                break;
+                throw new AlreadyExistException("The customer Already exist!");
             }
         }
-        if (!thisCustomerExist) {
-            customerDBDAO().addCustomer(customer);
-        } else {
-            throw new AlreadyExistException("The customer Already exist!");
-        }
+        customerDBDAO().addCustomer(customer);
     }
 
-    public void updateCustomer(Customer customer) throws SQLException {
+    public void updateCustomer(Customer customer) throws SQLException, CustomerException {
         customerDBDAO().updateCustomer(customer);
     }
 
-    public void deleteCustomer(int customerID) throws SQLException {
+    public void deleteCustomer(int customerID) throws SQLException, CouponException, CustomerException {
         couponDBDAO().deleteCouponPurchaseByCustomerID(customerID);
         customerDBDAO().deleteCustomer(customerID);
     }

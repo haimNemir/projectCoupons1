@@ -2,6 +2,7 @@ package DAL.Company;
 
 import Beans.Company;
 import DB.ConnectionPool;
+import Exceptions.CompanyException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,40 +31,49 @@ public class CompaniesDBDAO implements CompaniesDAO {
     }
 
     @Override
-    public void addCompany(Company company) throws SQLException {
+    public void addCompany(Company company) throws SQLException, CompanyException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("insert into couponsdb.companies(name, email, password) values(?, ?, ?);");
             statement.setString(1, company.getName());
             statement.setString(2, company.getEmail());
             statement.setString(3, company.getPassword());
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CompanyException("Not found any company to add");
+            }
         } finally {
             pool.restoreConnection(con);
         }
     }
 
     @Override
-    public void updateCompany(Company company) throws SQLException {
+    public void updateCompany(Company company) throws SQLException, CompanyException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("update couponsdb.companies set email = (?), password = (?) where id = (?);");
             statement.setString(1, company.getEmail());
             statement.setString(2, company.getPassword());
             statement.setInt(3, company.getId());
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CompanyException("Not found any company with this ID to update");
+            }
         } finally {
             pool.restoreConnection(con);
         }
     }
 
     @Override
-    public void deleteCompany(int companyID) throws SQLException {
+    public void deleteCompany(int companyID) throws SQLException, CompanyException {
         Connection con = pool.getConnection();
         try {
             PreparedStatement statement = con.prepareStatement("delete from couponsdb.companies where id = (?);");
             statement.setInt(1, companyID);
-            statement.execute();
+            if (statement.executeUpdate() <= 0) {
+                pool.restoreConnection(con);
+                throw new CompanyException("Not found any company to delete");
+            }
         } finally {
             pool.restoreConnection(con);
         }

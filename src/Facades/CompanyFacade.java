@@ -1,5 +1,6 @@
 package Facades;
 
+import Exceptions.CouponException;
 import Utils.Category;
 import Beans.Company;
 import Beans.Coupon;
@@ -39,18 +40,14 @@ public class CompanyFacade extends ClientFacade {
      * @throws SQLException
      * @throws AlreadyExistException
      */
-    public void addCoupon(Coupon coupon) throws SQLException, AlreadyExistException {
+    public void addCoupon(Coupon coupon) throws SQLException, AlreadyExistException, CouponException {
         ArrayList<Coupon> coupons = couponDBDAO().getAllCoupons();
-        boolean isNotExist = true;
-        for (int i = 0; i < coupons.size(); i++) { // valid if the company is already exist
-            if (Objects.equals(coupons.get(i).getTitle(), coupon.getTitle()) && coupons.get(i).getCompanyID() == coupon.getCompanyID()) {
-                isNotExist = false;
+        for (Coupon value : coupons) { // valid if the coupon is already exist in this company
+            if (Objects.equals(value.getTitle(), coupon.getTitle()) && value.getCompanyID() == coupon.getCompanyID()) {
                 throw new AlreadyExistException("The coupon is already exist for this company");
             }
         }
-        if (isNotExist) {// valid if is a new company
-            couponDBDAO().addCoupon(coupon);
-        }
+        couponDBDAO().addCoupon(coupon);
     }
 
     /**
@@ -61,12 +58,17 @@ public class CompanyFacade extends ClientFacade {
      * @throws SQLException
      * @throws NotExistException
      */
-    public void updateCoupon(Coupon coupon) throws SQLException, NotExistException {
-        coupon.setCompanyID(couponDBDAO().getOneCoupon(coupon.getId()).getCompanyID());
+    public void updateCoupon(Coupon coupon) throws SQLException, NotExistException, CouponException {
+        int changedId = coupon.getCompanyID();
+        int firstId = couponDBDAO().getOneCoupon(coupon.getId()).getCompanyID();
+        if (changedId != firstId){
+            System.out.println("can't change company id! set to deflate");
+        }
+        coupon.setCompanyID(firstId); // set the company ID to the first value
         couponDBDAO().updateCoupon(coupon);
     }
 
-    public void deleteCoupon(int couponID) throws SQLException {
+    public void deleteCoupon(int couponID) throws SQLException, CouponException {
         couponDBDAO().deleteCouponPurchaseByCouponID(couponID);
         couponDBDAO().deleteCoupon(couponID);
     }
