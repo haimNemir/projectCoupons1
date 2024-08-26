@@ -142,6 +142,4 @@ public class CompanyFacade extends ClientFacade {
     protected CouponDBDAO couponDBDAO() throws SQLException {
         return new CouponDBDAO();
     }
-
-
 }
