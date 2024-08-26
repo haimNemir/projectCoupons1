@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f642b911-4f40-4ea0-b8c2-1ebd1e4cc20b" name="Changes" comment="Finish phase one Project Coupons">
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/CompanyException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/CustomerException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Beans/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Beans/Company.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Company/CompaniesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Company/CompaniesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Company/CompaniesDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Company/CompaniesDBDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Coupons/CouponDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Coupons/CouponDBDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Coupons/CouponsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Coupons/CouponsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Customer/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Customer/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Customer/CustomerDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Customer/CustomerDBDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Facades/AdminFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/AdminFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Facades/CompanyFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/CompanyFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Facades/CustomerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/CustomerFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Facades/LoginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facades/LoginManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/CouponExpirationDailyJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/CouponExpirationDailyJob.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,20 +36,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Program.executor": "Run",
-    "Application.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Haim/IdeaProjects/IdeaProjects/CouponsProject2",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Program.executor&quot;: &quot;Run&quot;,
+    &quot;Application.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Haim/IdeaProjects/IdeaProjects/CouponsProject2&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Exceptions" />
@@ -148,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724013816941</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Finish phase one Project Coupons">
+      <option name="closed" value="true" />
+      <created>1724594250479</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1724594250479</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
